@@ -25,9 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-&yfmdv9&a0m*=^p#(4xfdd)!q%6sp#=e+33gger=hxc#y3sbp0')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = 'RENDER' not in os.environ  # False en production sur Render
+ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']  # Ajoutez votre domaine Render plus tard, ex: ['*'] pour test (non sécurisé)
+if 'RENDER' in os.environ:
+    ALLOWED_HOSTS.append(os.environ.get('RENDER_EXTERNAL_HOSTNAME'))
 
-ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1', 'porfolio-yanava-ibzloxe9y-yanava-dieudonne-s-projects.vercel.app']
+
 
 
 # Application definition
@@ -80,7 +83,10 @@ WSGI_APPLICATION = 'portfolio_project.wsgi.application'
 
 # Configuration de la base de données (par exemple, PostgreSQL)
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('https://sajnatzsdizmsrjaegus.supabase.co'), conn_max_age=600)
+    'default': dj_database_url.config(
+        default=os.environ.get('postgresql://portfolio_db_nfo0_user:NTq28QC8gqcqylD1FGeSiKl8oaRxlkRo@dpg-d2njld8gjchc738f8bt0-a/portfolio_db_nfo0','https://sajnatzsdizmsrjaegus.supabase.co', 'sqlite:///db.sqlite3'),  # Fallback local
+        conn_max_age=600
+    )
 }
 
 
