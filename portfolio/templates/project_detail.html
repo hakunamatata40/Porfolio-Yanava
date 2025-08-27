@@ -1,0 +1,300 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section Détail Projet -->
+<section class="project-detail-hero" style="background: linear-gradient(rgba(10, 25, 47, 0.9), rgba(10, 25, 47, 0.9)), url('{{ project.image.url }}'); background-size: cover; background-position: center;">
+    <div class="container">
+        <div class="row min-vh-50 align-items-center">
+            <div class="col-lg-8 mx-auto text-center text-white fade-in">
+                <a href="{% url 'projects' %}" class="btn btn-outline-light mb-4">
+                    <i class="fas fa-arrow-left me-2"></i>Retour aux projets
+                </a>
+                <h6 class="text-accent mb-3">{{ project.technology }}</h6>
+                <h1 class="hero-title mb-4">{{ project.title }}</h1>
+                <p class="hero-subtitle">{{ project.description|truncatewords:30 }}</p>
+                <div class="project-actions mt-5">
+                    {% if project.project_url %}
+                    <a href="{{ project.project_url }}" target="_blank" class="btn btn-primary-custom me-3">
+                        <i class="fas fa-external-link-alt me-2"></i>Voir le projet
+                    </a>
+                    {% endif %}
+                    {% if project.github_url %}
+                    <a href="{{ project.github_url }}" target="_blank" class="btn btn-dark">
+                        <i class="fab fa-github me-2"></i>Code source
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Détails du projet -->
+<section class="py-6">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="project-content">
+                    <div class="project-image-main mb-5 slide-in-left">
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="img-fluid rounded-3 shadow">
+                    </div>
+                    
+                    <div class="project-details">
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <div class="detail-card">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-calendar"></i>
+                                    </div>
+                                    <div class="detail-content">
+                                        <h5>Date de réalisation</h5>
+                                        <p>{{ project.created_at|date:"F Y" }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="detail-card">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <div class="detail-content">
+                                        <h5>Technologies</h5>
+                                        <p>{{ project.technology }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="project-description mb-5 fade-in">
+                            <h3 class="mb-4">À propos du projet</h3>
+                            <div class="description-text">
+                                {{ project.description|linebreaks }}
+                            </div>
+                        </div>
+                        
+                        {% if project.project_url or project.github_url %}
+                        <div class="project-links-section mb-5 fade-in">
+                            <h3 class="mb-4">Liens du projet</h3>
+                            <div class="d-flex flex-wrap gap-3">
+                                {% if project.project_url %}
+                                <a href="{{ project.project_url }}" target="_blank" class="btn btn-outline-primary">
+                                    <i class="fas fa-external-link-alt me-2"></i>Visiter le projet
+                                </a>
+                                {% endif %}
+                                {% if project.github_url %}
+                                <a href="{{ project.github_url }}" target="_blank" class="btn btn-outline-dark">
+                                    <i class="fab fa-github me-2"></i>Repository GitHub
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Navigation entre projets -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="project-navigation">
+            <div class="row">
+                <div class="col-6">
+                    {% if previous_project %}
+                    <a href="{% url 'project_detail' previous_project.id %}" class="nav-link nav-link-prev">
+                        <div class="nav-arrow">
+                            <i class="fas fa-arrow-left"></i>
+                        </div>
+                        <div class="nav-content">
+                            <span>Projet précédent</span>
+                            <h6>{{ previous_project.title }}</h6>
+                        </div>
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="col-6 text-end">
+                    {% if next_project %}
+                    <a href="{% url 'project_detail' next_project.id %}" class="nav-link nav-link-next">
+                        <div class="nav-content">
+                            <span>Projet suivant</span>
+                            <h6>{{ next_project.title }}</h6>
+                        </div>
+                        <div class="nav-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Styles spécifiques à la page détail projet */
+    .min-vh-50 {
+        min-height: 50vh;
+    }
+    
+    .project-detail-hero {
+        padding: 120px 0 80px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    /* Image principale du projet */
+    .project-image-main img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.3s ease;
+    }
+    
+    .project-image-main:hover img {
+        transform: scale(1.02);
+    }
+    
+    /* Cartes de détails */
+    .detail-card {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease;
+        height: 100%;
+    }
+    
+    .detail-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .detail-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--accent-color);
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-right: 20px;
+        flex-shrink: 0;
+    }
+    
+    .detail-content h5 {
+        color: var(--primary-color);
+        margin-bottom: 5px;
+    }
+    
+    /* Description du projet */
+    .description-text {
+        line-height: 1.8;
+        font-size: 1.1rem;
+        color: #555;
+    }
+    
+    /* Navigation entre projets */
+    .project-navigation {
+        padding: 20px 0;
+    }
+    
+    .nav-link {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        background: white;
+        border-radius: 15px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+    
+    .nav-link-prev {
+        text-align: left;
+    }
+    
+    .nav-link-next {
+        text-align: right;
+        flex-direction: row-reverse;
+    }
+    
+    .nav-link:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        color: var(--primary-color);
+    }
+    
+    .nav-arrow {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--accent-color);
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+    
+    .nav-content span {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .nav-content h6 {
+        margin: 0;
+        color: var(--primary-color);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .detail-card {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .detail-icon {
+            margin-right: 0;
+            margin-bottom: 15px;
+        }
+        
+        .nav-link {
+            padding: 15px;
+        }
+        
+        .nav-content h6 {
+            font-size: 0.9rem;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animation au défilement
+        const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.visibility = 'visible';
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        animatedElements.forEach(el => {
+            el.style.visibility = 'hidden';
+            observer.observe(el);
+        });
+    });
+</script>
+{% endblock %}
