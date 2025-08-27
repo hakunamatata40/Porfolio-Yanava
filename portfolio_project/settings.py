@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'portfolio_project.wsgi.application'
 # Configuration de la base de données (par exemple, PostgreSQL)
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('postgresql://portfolio_db_nfo0_user:NTq28QC8gqcqylD1FGeSiKl8oaRxlkRo@dpg-d2njld8gjchc738f8bt0-a/portfolio_db_nfo0','https://sajnatzsdizmsrjaegus.supabase.co', 'sqlite:///db.sqlite3'),  # Fallback local
+        default=os.environ.get('postgresql://portfolio_db_nfo0_user:NTq28QC8gqcqylD1FGeSiKl8oaRxlkRo@dpg-d2njld8gjchc738f8bt0-a/portfolio_db_nfo0','https://sajnatzsdizmsrjaegus.supabase.co'),  # Fallback local
         conn_max_age=600
     )
 }
