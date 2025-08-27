@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-&yfmdv9&a0m*=^p#(4xfd
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ  # False en production sur Render
-ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']  # Ajoutez votre domaine Render plus tard, ex: ['*'] pour test (non sécurisé)
+ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1','https://porfolio-yanava.onrender.com']  # Ajoutez votre domaine Render plus tard, ex: ['*'] pour test (non sécurisé)
 if 'RENDER' in os.environ:
     ALLOWED_HOSTS.append(os.environ.get('RENDER_EXTERNAL_HOSTNAME'))
 
