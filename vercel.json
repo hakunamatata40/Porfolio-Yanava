@@ -20,5 +20,5 @@
       "dest": "portfolio_project/wsgi.py"
     }
   ],
-  "outputDirectory": "staticfiles"
+  "outputDirectory": "static"
 }
