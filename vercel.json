@@ -3,17 +3,23 @@
   "builds": [
     {
       "src": "portfolio_project/wsgi.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "buildCommand": "bash build_files.sh"
+      }
     },
     {
-      "src": "build.sh",
-      "use": "@vercel/static-build"
+      "src": "build_files.sh",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "staticfiles"
+      }
     }
   ],
   "routes": [
     {
       "src": "/static/(.*)",
-      "dest": "/static/$1"
+      "dest": "/staticfiles/$1"
     },
     {
       "src": "/(.*)",
