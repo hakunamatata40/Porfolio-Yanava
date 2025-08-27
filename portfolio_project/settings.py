@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'portfolio_project.wsgi.application'
 # Configuration de la base de données (par exemple, PostgreSQL)
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('postgresql://portfolio_db_nfo0_user:NTq28QC8gqcqylD1FGeSiKl8oaRxlkRo@dpg-d2njld8gjchc738f8bt0-a/portfolio_db_nfo0','https://sajnatzsdizmsrjaegus.supabase.co'),  # Fallback local
+        default=os.environ.get('postgresql://neondb_owner:npg_g9XYi7HGoQwV@ep-solitary-poetry-adgcf70t-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require','https://sajnatzsdizmsrjaegus.supabase.co'),  # Fallback local
         conn_max_age=600
     )
 }
