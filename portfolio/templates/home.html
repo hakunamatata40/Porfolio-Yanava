@@ -65,7 +65,8 @@
                     <a href="{% url 'about' %}" class="btn btn-primary-custom">
                         <i class="fas fa-user me-2"></i>En savoir plus
                     </a>
-                    <a href="../../media/CV YANAVA.pdf" class="btn btn-outline-dark">
+                    <!-- Par cette ligne : -->
+                    <a href="{% static 'CV YANAVA Dieudonné.pdf' %}" download="CV YANAVA Dieudonné.pdf" class="btn btn-outline-dark">
                         <i class="fas fa-download me-2"></i>Télécharger CV
                     </a>
                 </div>
